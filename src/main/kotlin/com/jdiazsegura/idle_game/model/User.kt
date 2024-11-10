@@ -1,3 +1,5 @@
+import com.jdiazsegura.idle_game.repository.entity.UserEntity
+import com.jdiazsegura.idle_game.service.model.ResponseModel
 import jakarta.persistence.*
 import java.util.*
 
@@ -19,4 +21,21 @@ data class User(
 
     @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     val prestige: Prestige? = null
-)
+) {
+
+    fun toResponseModel() = ResponseModel(
+        id = id!!,
+        name = name,
+        points = points,
+        level = level,
+        coins = coins,
+    )
+
+    fun toEntity() = UserEntity(
+        id = id.toString(),
+        name = name,
+        points = points,
+        level = level,
+        coins = coins
+    )
+}

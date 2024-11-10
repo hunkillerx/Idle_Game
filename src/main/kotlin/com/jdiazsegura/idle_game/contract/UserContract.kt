@@ -19,5 +19,8 @@ interface UserContract {
     ): ResponseEntity<ResponseModel>
 
     @PostMapping("/api/user/new")
-    fun newUser(user: User): ResponseEntity<ResponseModel>
+    fun newUser(
+        @RequestBody
+        dto: UserDto
+    ): ResponseEntity<ResponseModel>
 }

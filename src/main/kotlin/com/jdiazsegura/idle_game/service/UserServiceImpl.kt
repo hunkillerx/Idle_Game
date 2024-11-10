@@ -10,9 +10,13 @@ import java.util.*
 @Component
 class UserServiceImpl(
     private val userRepository: UserRepository
-):UserService {
+) : UserService {
 
     override fun getUserById(userId: UUID): User? {
         return userRepository.getById(userId)
+    }
+
+    override fun newUser(user: User): User? {
+        return userRepository.newUser(user)
     }
 }

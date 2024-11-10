@@ -7,4 +7,6 @@ import java.util.*
 interface UserService {
 
     fun getUserById(userId: UUID): User?
+
+    fun newUser(user: User): User?
 }

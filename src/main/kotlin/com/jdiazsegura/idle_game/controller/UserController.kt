@@ -6,23 +6,19 @@ import com.jdiazsegura.idle_game.controller.dtos.UserDto
 import com.jdiazsegura.idle_game.service.UserService
 import com.jdiazsegura.idle_game.service.model.ResponseModel
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
 
 @RestController
 class UserController(
     private val userService: UserService
-):UserContract {
+) : UserContract {
 
 
     override fun getUserById(dto: UserDto): ResponseEntity<ResponseModel> {
-        return userService.getUserById(dto.id!!)
+        return ResponseEntity.ok(userService.getUserById(dto.id!!)?.toResponseModel())
     }
 
-    override fun newUser(user: User): ResponseEntity<ResponseModel> {
-        TODO("Not yet implemented")
+    override fun newUser(dto: UserDto): ResponseEntity<ResponseModel> {
+        return ResponseEntity.ok(userService.newUser(dto.toModel())?.toResponseModel())
     }
 }

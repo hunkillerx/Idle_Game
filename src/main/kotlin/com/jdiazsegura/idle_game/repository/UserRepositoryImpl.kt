@@ -9,11 +9,15 @@ import java.util.UUID
 @Repository
 class UserRepositoryImpl(val repo: UserRepositorySpringData):UserRepository {
     override fun getById(id: UUID): User? {
-       return repo.findUserById(id)?.toUser()
+       return repo.findUserById(id.toString())?.toUser()
+    }
+
+    override fun newUser(user: User): User? {
+        return repo.save(user.toEntity()).toUser()
     }
 }
 
 @Repository
 interface UserRepositorySpringData:CrudRepository<UserEntity,UUID>{
-    fun findUserById(id: UUID): UserEntity?
+    fun findUserById(id: String): UserEntity?
 }
