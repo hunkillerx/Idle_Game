@@ -1,14 +1,15 @@
 import jakarta.persistence.*
+import java.util.*
 
 @Entity
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: UUID? = null,
     var name: String,
-    var points: Long = 0,
-    var level: Long = 1,
-    var coins: Long = 0,
+    var points: Int = 0,
+    var level: Int = 1,
+    var coins: Int = 0,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     val resources: MutableList<Resource> = mutableListOf(),
